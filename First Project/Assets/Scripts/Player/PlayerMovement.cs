@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Vector2 maxSpeed;
-    public Vector2 timeToFullSpeed;
-    public Vector2 timeToStop;
-    public Vector2 stopClamp;
+    [SerializeField] private Vector2 maxSpeed;
+    [SerializeField] private Vector2 timeToFullSpeed;
+    [SerializeField] private Vector2 timeToStop;
+    [SerializeField] private Vector2 stopClamp;
 
     private Vector2 moveDirection;
     private Vector2 moveVelocity;
