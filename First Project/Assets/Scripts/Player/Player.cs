@@ -6,10 +6,12 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
     
-    private PlayerMovement playerMovement;
-    private Animator animator;
+    PlayerMovement playerMovement;
+    Animator animator;
+    // New field to track if the player has a weapon
+    private bool hasWeapon = false;
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
@@ -22,19 +24,35 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         animator = GameObject.Find("EngineEffect").GetComponent<Animator>();
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         playerMovement.Move();
     }
 
-    private void LateUpdate()
+    void LateUpdate()
     {
         animator.SetBool("IsMoving", playerMovement.IsMoving());
+    }
+    // New method to check if the player has a weapon
+    public bool HasWeapon()
+    {
+        return hasWeapon;
+    }
+
+    // Optional: Method to set whether the player has a weapon
+    public void PickUpWeapon()
+    {
+        hasWeapon = true;
+    }
+
+    public void DropWeapon()
+    {
+        hasWeapon = false;
     }
 }

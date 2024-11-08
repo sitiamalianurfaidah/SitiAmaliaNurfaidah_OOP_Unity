@@ -70,8 +70,8 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = velocity;
 
-        // Panggil ClampPosition untuk membatasi pergerakan
-        ClampPosition();
+        // Panggil MoveBound() untuk membatasi pergerakan
+        MoveBound();
     }
 
     private Vector2 GetFriction()
@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
         return moveDirection != Vector2.zero ? moveFriction * moveDirection : stopFriction * rb.velocity.normalized;
     }
 
-    private void ClampPosition()
+    private void MoveBound()
     {
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x, -screenBounds.x, screenBounds.x);
@@ -88,13 +88,8 @@ public class PlayerMovement : MonoBehaviour
         transform.position = pos;
     }
 
-    private void MoveBound()
-    {
-        // Kosongkan sesuai instruksi
-    }
-
     public bool IsMoving()
     {
-        return rb.velocity.magnitude > stopClamp.magnitude;
+        return rb.velocity.magnitude > 0.1f;
     }
 }
