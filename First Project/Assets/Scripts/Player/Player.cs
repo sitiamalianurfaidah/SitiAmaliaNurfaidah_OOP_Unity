@@ -8,8 +8,6 @@ public class Player : MonoBehaviour
     
     PlayerMovement playerMovement;
     Animator animator;
-    // New field to track if the player has a weapon
-    private bool hasWeapon = false;
 
     void Awake()
     {
@@ -38,21 +36,5 @@ public class Player : MonoBehaviour
     void LateUpdate()
     {
         animator.SetBool("IsMoving", playerMovement.IsMoving());
-    }
-    // New method to check if the player has a weapon
-    public bool HasWeapon()
-    {
-        return hasWeapon;
-    }
-
-    // Optional: Method to set whether the player has a weapon
-    public void PickUpWeapon()
-    {
-        hasWeapon = true;
-    }
-
-    public void DropWeapon()
-    {
-        hasWeapon = false;
     }
 }
