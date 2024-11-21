@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyTargeting : Enemy
 {
-    public float speed = 4f;
+    public float speed = 2f;
     private Transform player;
 
     void Start()
