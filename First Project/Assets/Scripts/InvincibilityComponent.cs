@@ -8,15 +8,41 @@ public class InvincibilityComponent : MonoBehaviour
     [SerializeField] private float blinkInterval = 0.1f;
     [SerializeField] private Material blinkMaterial;
     
-    private SpriteRenderer spriteRenderer;
+    private bool isPlayer = false;
     private Material originalMaterial;
     public bool isInvincible = false;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        originalMaterial = spriteRenderer.material;
+        isPlayer = gameObject.CompareTag("Player");
+
+        if (isPlayer)
+        {
+            Transform shipTransform = transform.Find("Ship");
+            if (shipTransform != null)
+            {
+                spriteRenderer = shipTransform.GetComponent<SpriteRenderer>();
+                if (spriteRenderer == null)
+                {
+                    Debug.LogError("Ship child object doesn't have a SpriteRenderer!");
+                }
+            }
+            else
+            {
+                Debug.LogError("Player doesn't have a child named 'Ship'!");
+            }
+        }
+        else
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+
+        if (spriteRenderer != null)
+        {
+            originalMaterial = spriteRenderer.material;
+        }
     }
 
     // Enumerator for blinking effect

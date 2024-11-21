@@ -9,28 +9,24 @@ public class EnemyHorizontal : Enemy
 
     void Start()
     {
-        // Tentukan arah spawn dari kiri atau kanan secara acak
-        if (Random.value > 0.5f)
-        {
-            transform.position = new Vector2(-10, transform.position.y); // spawn dari kiri
-            direction = Vector2.right; // bergerak ke kanan
-        }
-        else
-        {
-            transform.position = new Vector2(10, transform.position.y); // spawn dari kanan
-            direction = Vector2.left; // bergerak ke kiri
-        }
+        // Tentukan posisi awal dan arah gerakan horizontal
+        transform.position = new Vector2(Random.Range(-10, 10), transform.position.y);
+        direction = Vector2.right; // Default: bergerak ke kanan
     }
 
     void Update()
     {
-        // Gerakkan EnemyHorizontal dalam arah yang ditentukan
+        // Gerakkan Enemy sesuai arah
         transform.Translate(direction * speed * Time.deltaTime);
 
-        // Ketika Enemy sudah keluar layar, balik arah gerakan
-        if (transform.position.x > 12 || transform.position.x < -12)
+        // Ubah arah jika keluar dari layar horizontal
+        if (transform.position.x > 12)
         {
-            direction = -direction;
+            direction = Vector2.left; // Berbalik ke kiri
+        }
+        else if (transform.position.x < -12)
+        {
+            direction = Vector2.right; // Berbalik ke kanan
         }
     }
 }

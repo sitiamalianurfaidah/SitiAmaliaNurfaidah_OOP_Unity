@@ -5,29 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class HitboxComponent : MonoBehaviour
 {
-    private HealthComponent health;
-
-    void Start()
+    [SerializeField] private HealthComponent healthComponent;
+    private InvincibilityComponent flashComponent;
+    private void Start()
     {
-        health = GetComponent<HealthComponent>();
+        flashComponent = GetComponent<InvincibilityComponent>();
     }
-
-    // Damage overload to receive Bullet
-    public void Damage(Bullet bullet)
+    public void Damage(int damage)
     {
-        if (health != null)
+        if (healthComponent != null && (flashComponent == null || !flashComponent.isInvincible))
         {
-            health.Subtract(bullet.damage); // Assume bullet has a damage property
+            healthComponent.Subtract(damage);
         }
     }
 
-    // Damage overload to receive integer damage
-    public void Damage(int damage)
+    public void Damage(Bullet bullet)
     {
-        if (health != null)
+        if (healthComponent != null && (flashComponent == null || !flashComponent.isInvincible))
         {
-            health.Subtract(damage);
+            healthComponent.Subtract(bullet.damage);
         }
     }
 }
-

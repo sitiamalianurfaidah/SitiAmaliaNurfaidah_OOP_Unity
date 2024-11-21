@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     public int damage = 10;
     private Rigidbody2D rb;
     public IObjectPool<Bullet> bulletPool;
+    public Vector2 direction = Vector2.up; // Default ke atas
+
 
     public void SetPool(IObjectPool<Bullet> pool)
     {
@@ -23,10 +25,14 @@ public class Bullet : MonoBehaviour
 
     // Function to launch the bullet
     public void FixedUpdate()
-    {
-        Debug.Log("Launching Bullet with speed: " + bulletSpeed);
-        rb.velocity = Vector2.up * bulletSpeed * Time.deltaTime;
-    }
+{
+    rb.velocity = direction * bulletSpeed * Time.deltaTime;
+}
+public void SetDirection(Vector2 newDirection)
+{
+    direction = newDirection;
+}
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
