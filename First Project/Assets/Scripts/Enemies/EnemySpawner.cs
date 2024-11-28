@@ -42,6 +42,7 @@ public void StartSpawning()
             for (int i = 0; i < spawnCount; i++)
             {
                 Instantiate(spawnedEnemy, transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(0.5f);
             }
 
             yield return new WaitForSeconds(spawnInterval);

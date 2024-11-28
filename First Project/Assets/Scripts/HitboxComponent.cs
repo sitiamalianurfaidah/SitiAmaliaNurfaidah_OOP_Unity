@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider2D), typeof(HealthComponent))]
 public class HitboxComponent : MonoBehaviour
 {
-    [SerializeField] private HealthComponent healthComponent;
+    private HealthComponent healthComponent;
     private InvincibilityComponent flashComponent;
     private void Start()
     {
         flashComponent = GetComponent<InvincibilityComponent>();
+        healthComponent = GetComponent<HealthComponent>();
     }
+    
     public void Damage(int damage)
     {
         if (healthComponent != null && (flashComponent == null || !flashComponent.isInvincible))
